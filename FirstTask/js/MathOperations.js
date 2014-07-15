@@ -1,5 +1,6 @@
 /**
- * Created by Jaime on 7/7/2014.
+ * Created by Jaime on 7/7/2014. 
+* comment added by ipad
  */
 
 var totalSum=0;
