@@ -10,6 +10,11 @@ var maxItem=0;
 var mimItem=0;
 var itemsList;
 
+/**
+ * This function clears all the global variables to use in recursion.
+ *
+ * @author Jaime Barriga
+ */
 var resetValues = function () {
     totalSum=0;
     numRums=0;
@@ -18,10 +23,23 @@ var resetValues = function () {
     mimItem=0;
 };
 
+/**
+ * This function gets the total number of arguments of the current function.
+ *
+ * @author Jaime Barriga
+ * @returns {Number}
+ */
 var getTotalNumberArguments = function() {
     return arguments.length;
 };
 
+/**
+ * This function sums recursively all the numbers sent as arguments.
+ *
+ * @author Jaime Barriga
+ * @param args
+ * @returns {number}
+ */
 var sumAllItems = function(args) {
     if(numRums==0) {
         totalItems=arguments.length;
@@ -44,6 +62,13 @@ var sumAllItems = function(args) {
     }
 };
 
+/**
+ * This function gets recursively the max item from all the numbers sent as arguments.
+ *
+ * @author Jaime Barriga
+ * @param args
+ * @returns {number}
+ */
 var getMaxItem = function (args) {
     if(numRums==0) {
         totalItems=arguments.length;
@@ -66,6 +91,13 @@ var getMaxItem = function (args) {
     }
 };
 
+/**
+ * This function gets recursively the min item from all the numbers sent as arguments.
+ *
+ * @author Jaime Barriga
+ * @param args
+ * @returns {*}
+ */
 var getMinItem = function (args) {
     if(numRums==0) {
         totalItems=arguments.length;
@@ -88,6 +120,13 @@ var getMinItem = function (args) {
     }
 };
 
+/**
+ * This function gets recursively the average from all the numbers sent as arguments.
+ *
+ * @author Jaime Barriga
+ * @param args
+ * @returns {number}
+ */
 var getAverage = function(args) {
     var totalSum=sumAllItems.apply(this, arguments);
     totalItems=getTotalNumberArguments.apply(this, arguments);
