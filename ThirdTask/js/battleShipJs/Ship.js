@@ -4,21 +4,29 @@
 
 var Ship = function(id) {
     var _id = id;
-    var _position = null;
+    var _initXpos = null;
+    var _initYpos = null;
     var _direction = null; //0=Horizontal , 1=Vertical
     var _size = null;
-    this.status = ALIVE;
+    this._status = ALIVE;
 
 
     this.getId = function(){
         return _id;
     };
 
-    this.getPosition = function(){
-        return _position;
+    this.getXPosition = function(){
+        return _initXpos;
     };
-    this.setPosition = function(newPosition){
-        _position = newPosition;
+    this.setXPosition = function(newPosition){
+        _initXpos = newPosition;
+    };
+
+    this.getYPosition = function(){
+        return _initYpos;
+    };
+    this.setYPosition = function(newPosition){
+        _initYpos = newPosition;
     };
 
     this.getDiretion = function() {
@@ -42,7 +50,7 @@ var Ship = function(id) {
 
 Ship.prototype.create = function(){
     this.setSize(parseInt(Math.random() * MAX_SHIP_SIZE)+1);
-    this.setPosition(parseInt(Math.random() * FIELD_SIZE - this.size));
+    //this.setPosition(parseInt(Math.random() * FIELD_SIZE - this.size));
     this.setDirection(parseInt(Math.random()*2));
 };
 
