@@ -8,8 +8,7 @@ var Ship = function(id) {
     var _initYpos = null;
     var _direction = null; //0=Horizontal , 1=Vertical
     var _size = null;
-    this._status = ALIVE;
-
+    var _status = ALIVE;
 
     this.getId = function(){
         return _id;
@@ -18,6 +17,7 @@ var Ship = function(id) {
     this.getXPosition = function(){
         return _initXpos;
     };
+
     this.setXPosition = function(newPosition){
         _initXpos = newPosition;
     };
@@ -25,11 +25,12 @@ var Ship = function(id) {
     this.getYPosition = function(){
         return _initYpos;
     };
+
     this.setYPosition = function(newPosition){
         _initYpos = newPosition;
     };
 
-    this.getDiretion = function() {
+    this.getDirection = function() {
         return _direction;
     };
 
@@ -45,12 +46,26 @@ var Ship = function(id) {
         _size = newSize;
     };
 
+    this.getStatus = function() {
+        return _status;
+    };
+
+    this.setStatus = function(newStatus) {
+        _status = newStatus;
+    };
+
     this.create();
 };
 
+/**
+ * This function generates randomly the ship size and direction.
+ * The ship size varies between 1 to 3.
+ * The ship direction varies between 0=Horizontal , 1=Vertical.
+ *
+ * @author Jaime Barriga
+ */
 Ship.prototype.create = function(){
     this.setSize(parseInt(Math.random() * MAX_SHIP_SIZE)+1);
-    //this.setPosition(parseInt(Math.random() * FIELD_SIZE - this.size));
     this.setDirection(parseInt(Math.random()*2));
 };
 

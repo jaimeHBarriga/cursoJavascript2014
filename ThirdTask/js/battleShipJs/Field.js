@@ -8,7 +8,6 @@ Field = function() {
     var _status = INITIAL_STATUS;
     var _field = [];
 
-
     /**
      * This method returns the field instance.
      * @returns {Array}
@@ -51,7 +50,7 @@ Field = function() {
         initYPos = ship.getYPosition();
 
         for(i=0; i<ship.getSize(); i++) {
-            if(ship.getDiretion() == 0) {
+            if(ship.getDirection() == 0) {
                 _field[initXPos][initYPos+i] = shipIcon;
             } else {
                 _field[initXPos+i][initYPos] = shipIcon;
@@ -64,38 +63,37 @@ Field = function() {
     this.draw();
 };
 
-
+Field.prototype.generateRandomPosition = function (maxSize) {
+    return parseInt(Math.random()*(maxSize));
+};
 
 Field.prototype.generateRandomCoordinates = function(ship) {
-    maxHorizontal = FIELD_SIZE;
-    maxVertical = FIELD_SIZE;
-    gameField = this.getField();
-    shipDirection = ship.getDiretion();
-    shipSize = ship.getSize();
+    var maxHorizontal = 0;
+    var maxVertical = 0;
+    var gameField = this.getField();
+    var shipDirection = ship.getDirection();
+    var shipSize = ship.getSize();
 
-
-    console.log('The direction : '+ship.getDiretion());
     if(shipDirection==0) {
-        maxVertical = maxVertical - shipSize;
+        maxVertical = FIELD_SIZE - shipSize;
     } else {
-        maxHorizontal = maxHorizontal - shipSize;
+        maxHorizontal = FIELD_SIZE - shipSize;
     }
 
-    xPos = parseInt(Math.random()*(maxHorizontal));
-    yPos = parseInt(Math.random()*(maxVertical));
+    this.xPos = this.generateRandomPosition(maxHorizontal);  //parseInt(Math.random()*(maxHorizontal));
+    this.yPos = this.generateRandomPosition(maxVertical);//parseInt(Math.random()*(maxVertical));
 
-    var gameCell = gameField[xPos][yPos].trim();
-    console.log('Verifing the gameCell : '+gameCell);
+    var gameCell = gameField[this.xPos][this.yPos].trim();
     while(gameCell.localeCompare('-')!=0 && gameCell.localeCompare('S')==1) {
-        console.log('The position is busy, we need to generate a new position '+gameCell);
-        xPos = parseInt(Math.random()*(maxHorizontal));
-        yPos = parseInt(Math.random()*(maxVertical));
+        //The position is busy, we need to generate a new position
+        this.xPos = this.generateRandomPosition(maxHorizontal);//parseInt(Math.random()*(maxHorizontal));
+        this.yPos = this.generateRandomPosition(maxVertical);//parseInt(Math.random()*(maxVertical));
 
         gameCell = gameField[xPos][yPos].trim();
-    }
+    };
 
-    ship.setXPosition(xPos);
-    ship.setYPosition(yPos);
+    ship.setXPosition(this.xPos);
+    ship.setYPosition(this.yPos);
 };
 
 Field.prototype.create = function() {

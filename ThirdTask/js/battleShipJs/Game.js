@@ -6,28 +6,18 @@ Game  = function() {
     this.startTime
     this.endTime
     this.players = [];
-
-    // Game / create
-    /*
-     end = function() {};
-     createField = function() {};
-     drawField = function() {};
-     createShips = function() {};
-     drawShips = function() {};
-     getPlayerShot = function() {};
-     */
-}
+};
 
 Game.prototype.createPlayer = function() {
-    var name = window.prompt('Hello\nPlease introduce your name :');
-    var nickName = window.prompt('Now, introduce your nickname : ');
+    var _name = window.prompt('Hello\nPlease introduce your name :');
+    var _nickName = window.prompt('Now introduce your nickname : ');
 
-    var newPlayer = new Player(name, nickName);
-    this.players.push(newPlayer);
+    var _newPlayer = new Player(_name, _nickName);
+    this.players.push(_newPlayer);
 };
 
 Game.prototype.start = function() {
-    for (var i = 0; i < this.players.length; i++){
+    for (i = 0; i < this.players.length; i++){
         this.players[i].createField();
     }
 };
