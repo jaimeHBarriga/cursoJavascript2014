@@ -45,11 +45,11 @@ Field = function() {
      * @param ship
      */
     this.addShipToField = function(ship) {
-        shipIcon = ' S'+ship.getId();
-        initXPos = ship.getXPosition();
-        initYPos = ship.getYPosition();
+        var shipIcon = ' S'+ship.getId();
+        var initXPos = ship.getXPosition();
+        var initYPos = ship.getYPosition();
 
-        for(i=0; i<ship.getSize(); i++) {
+        for(var i=0; i<ship.getSize(); i++) {
             if(ship.getDirection() == 0) {
                 _field[initXPos][initYPos+i] = shipIcon;
             } else {
@@ -63,10 +63,23 @@ Field = function() {
     this.draw();
 };
 
+/**
+ * This function generates randomly a position in the field.
+ *
+ * @author Jaime Barriga
+ * @param maxSize
+ * @returns {Number}
+ */
 Field.prototype.generateRandomPosition = function (maxSize) {
     return parseInt(Math.random()*(maxSize));
 };
 
+/**
+ * This function calculates valid positions for the ships taking into account the max field size and if there is already a ship in that position.
+ *
+ * @author Jaime Barriga
+ * @param ship
+ */
 Field.prototype.generateRandomCoordinates = function(ship) {
     var maxHorizontal = 0;
     var maxVertical = 0;
@@ -80,52 +93,69 @@ Field.prototype.generateRandomCoordinates = function(ship) {
         maxHorizontal = FIELD_SIZE - shipSize;
     }
 
-    this.xPos = this.generateRandomPosition(maxHorizontal);  //parseInt(Math.random()*(maxHorizontal));
-    this.yPos = this.generateRandomPosition(maxVertical);//parseInt(Math.random()*(maxVertical));
+    var xPos = this.generateRandomPosition(maxHorizontal);
+    var yPos = this.generateRandomPosition(maxVertical);
 
-    var gameCell = gameField[this.xPos][this.yPos].trim();
+    var gameCell = gameField[xPos][yPos].trim();
     while(gameCell.localeCompare('-')!=0 && gameCell.localeCompare('S')==1) {
         //The position is busy, we need to generate a new position
-        this.xPos = this.generateRandomPosition(maxHorizontal);//parseInt(Math.random()*(maxHorizontal));
-        this.yPos = this.generateRandomPosition(maxVertical);//parseInt(Math.random()*(maxVertical));
+        xPos = this.generateRandomPosition(maxHorizontal);//parseInt(Math.random()*(maxHorizontal));
+        yPos = this.generateRandomPosition(maxVertical);//parseInt(Math.random()*(maxVertical));
 
         gameCell = gameField[xPos][yPos].trim();
     };
 
-    ship.setXPosition(this.xPos);
-    ship.setYPosition(this.yPos);
+    ship.setXPosition(xPos);
+    ship.setYPosition(yPos);
 };
 
+/**
+ * This function creates an empty field.
+ *
+ * @author Jaime Barriga
+ */
 Field.prototype.create = function() {
     var gameField = [];
 
-    for (i = 0; i < this.size; i++) {
+    for (var i = 0; i < this.size; i++) {
         gameField[i] = [];
-        for(j=0; j<this.size;j++) {
+        for(var j=0; j<this.size;j++) {
             gameField[i][j] = ' - ';
         }
     }
     this.setField(gameField);
 };
 
+/**
+ * This function creates the ships and adds the ships to the field.
+ *
+ * @author Jaime Barriga.
+ */
 Field.prototype.createShips= function() {
-    for (z= 0; z < NUMBERS_OF_SHIPS; z++) {
-        console.log('Creating the ship nro : '+z);
-        var newShip = new Ship(z);
+    for (var i= 0; i < NUMBERS_OF_SHIPS; i++) {
+        var newShip = new Ship(i);
         this.generateRandomCoordinates(newShip);
         this.ships.push(newShip);
         this.addShipToField(newShip);
     }
 };
 
-/*Field.prototype.draw = function() {
-    console.log(this.getField().join('-'));
-};*/
-
+/**
+ * This function draws the field array in the console log.
+ *
+ * @author Jaime Barriga
+ */
 Field.prototype.draw = function() {
-    gameField = this.getField();
-    for(i=0; i<gameField.length; i++) {
+    var gameField = this.getField();
+    for(var i=0; i<gameField.length; i++) {
         console.log(gameField[i].join('    '));
         console.log('\n');
     }
+};
+
+Field.prototype.shoot = function(xPos, yPos) {
+    var gameField = this.getField();
+    gameField[xPos][yPos]= " X ";
+    this.setField(gameField);
+    this.draw();
 };
