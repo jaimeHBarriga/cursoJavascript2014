@@ -13,3 +13,7 @@ Player = function(name, nickName, lastName) {
 Player.prototype.createField = function(){
     this.field = new Field();
 };
+
+Player.prototype.getField = function() {
+    return this.field;
+};

@@ -17,13 +17,15 @@ Game.prototype.createPlayer = function() {
 };
 
 Game.prototype.start = function() {
-    for (i = 0; i < this.players.length; i++){
+    for (var i = 0; i < this.players.length; i++){
         this.players[i].createField();
     }
 
-    var xPos = window.prompt('Enter the X coordinate for the shot : ');
-    var yPos = window.prompt('Enter the Y coordinate for the shot : ');
-    while(this.players[0].getField().getFieldStatus()==INITIAL_STATUS) {
+    while((this.players[0]).getField().getFieldStatus()==INITIAL_STATUS) {
+
+        var xPos = window.prompt('Enter the X coordinate for the shot : ');
+        var yPos = window.prompt('Enter the Y coordinate for the shot : ');
+
         this.players[0].getField().shoot(xPos,yPos);
     }
 };
