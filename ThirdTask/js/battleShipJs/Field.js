@@ -155,20 +155,20 @@ Field.prototype.draw = function() {
 
 Field.prototype.shoot = function(xPos, yPos) {
     var gameField = this.getField();
-    gameField[xPos][yPos]= " X ";
+
+    gameField[xPos][yPos] = " X ";
     this.setField(gameField);
     this.draw();
-    this.isFieldAlive();
+    this.isFieldActive();
 };
 
-Field.prototype.isFieldAlive = function() {
-    var gameField = this.getField();
-    console.log('Field Size is : '+gameField.size);
+Field.prototype.isFieldActive = function() {
+    var tempField = this.getField();
     var shipCount = 0;
 
-    for(var i=0; i<gameField.size; i++) {
-        for(var j=0; j<gameField[i].size;j++) {
-            var cell = gameField[i][j];
+    for(var i=0; i<tempField.length; i++) {
+        for(var j=0; j<tempField[i].length;j++) {
+            var cell = tempField[i][j];
             console.log('the cell value is : '+cell);
 
             if(cell.contains('S')){
