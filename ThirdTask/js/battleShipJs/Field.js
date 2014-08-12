@@ -159,3 +159,16 @@ Field.prototype.shoot = function(xPos, yPos) {
     this.setField(gameField);
     this.draw();
 };
+
+Field.prototype.isFieldAlive = function() {
+    var gameField = this.getField();
+
+    for(var i=0; i<gameField.size; i++) {
+        for(var j=0; j<gameField[i].size;j++) {
+            var cell = gameField[i][j];
+            if(cell.contains('S')){
+
+            }
+        }
+    }
+};
