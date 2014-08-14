@@ -146,6 +146,8 @@ Field.prototype.createShips= function() {
  * @author Jaime Barriga
  */
 Field.prototype.draw = function() {
+
+    console.clear();
     var gameField = this.getField();
     for(var i=0; i<gameField.length; i++) {
         console.log(gameField[i].join('    '));
@@ -155,13 +157,23 @@ Field.prototype.draw = function() {
 
 Field.prototype.shoot = function(xPos, yPos) {
     var gameField = this.getField();
+    var cell = gameField[xPos][yPos];
 
-    gameField[xPos][yPos] = " X ";
-    this.setField(gameField);
-    this.draw();
-    this.verifyFieldStatus();
+    if(cell.indexOf('X') > 0) {
+        alert('You already shot in this position : x='+xPos+', y='+yPos);
+    } else {
+        gameField[xPos][yPos] = " X ";
+        this.setField(gameField);
+        this.draw();
+        this.verifyFieldStatus();
+    }
 };
 
+/**
+ * This function verifies if there is any alive ship in the field.
+ *
+ * @author Jaime Barriga
+ */
 Field.prototype.verifyFieldStatus = function() {
     var tempField = this.getField();
     var shipCount = 0;
@@ -169,7 +181,6 @@ Field.prototype.verifyFieldStatus = function() {
     for(var i=0; i<tempField.length; i++) {
         for(var j=0; j<tempField[i].length;j++) {
             var cell = tempField[i][j];
-
             if(cell.indexOf('S') > 0){
                 shipCount++;
                 break;
@@ -177,7 +188,7 @@ Field.prototype.verifyFieldStatus = function() {
         }
     }
 
-    if(shipCount<=0) {
+    if(shipCount<=0) { //There is not any ship in the field.
         this.setFieldStatus('INACTIVE');
     }
 };
