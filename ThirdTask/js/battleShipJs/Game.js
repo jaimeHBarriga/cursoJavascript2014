@@ -3,7 +3,7 @@
  */
 
 Game  = function() {
-    this.startTime
+    this.startTime = (new Date()).toLocaleString();
     this.endTime
     this.players = [];
 };
@@ -21,6 +21,13 @@ Game.prototype.start = function() {
         this.players[i].createField();
     }
 
+    var player = this.players[0];
+    var playerName = player.getName();
+    var nickName = player.getNickName();
+    var score = player.getScore();
+
+    console.log('Nickname : '+nickName+ '  Score : '+score);
+
     while((this.players[0]).getField().getFieldStatus()==INITIAL_STATUS) {
 
         var xPos = window.prompt('Enter the X coordinate for the shot : ');
@@ -28,5 +35,7 @@ Game.prototype.start = function() {
 
         this.players[0].getField().shoot(xPos,yPos);
     }
+    this.endTime = (new Date()).toLocaleString();
+    alert('GAME OVER !!! '+this.endTime);
 };
 

@@ -3,10 +3,10 @@
  */
 
 Player = function(name, nickName, lastName) {
-    this.name = name;
-    this.nickName = nickName;
+    var _name = name;
+    var _nickName = nickName;
     this.lastName = lastName;
-    this.score = 0;
+    var _score = 0;
     this.field = null;
 };
 
@@ -16,4 +16,20 @@ Player.prototype.createField = function(){
 
 Player.prototype.getField = function() {
     return this.field;
+};
+
+Player.prototype.getScore = function() {
+    return _score;
+};
+
+Player.prototype.setScore = function(newScore) {
+     _score = newScore;
+};
+
+Player.prototype.getNickName = function() {
+    return _nickName;
+};
+
+Player.prototype.getName = function() {
+    return _name;
 };
