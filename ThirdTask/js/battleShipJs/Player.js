@@ -2,34 +2,46 @@
  * Created by Jaime on 7/29/2014.
  */
 
-Player = function(name, nickName, lastName) {
+Player = function(name, nickName) {
     var _name = name;
     var _nickName = nickName;
-    this.lastName = lastName;
     var _score = 0;
-    this.field = null;
+    var _field = null;
+
+    this.getName = function() {
+        return _name;
+    };
+    this.setName = function(newName) {
+        _name = newName;
+    };
+
+    this.getNickName = function() {
+        return _nickName;
+    };
+    this.setNickName = function(newNickName) {
+        _nickName = newNickName;
+    };
+
+    this.getScore = function() {
+        return _score;
+    };
+
+    this.setScore = function(newScore) {
+        _score = newScore;
+    };
+
+    this.getField = function() {
+        return _field;
+    };
+
+    this.setField = function(newField) {
+        _field = newField;
+    };
 };
 
 Player.prototype.createField = function(){
-    this.field = new Field();
+    this.setField(new Field());
 };
 
-Player.prototype.getField = function() {
-    return this.field;
-};
 
-Player.prototype.getScore = function() {
-    return _score;
-};
 
-Player.prototype.setScore = function(newScore) {
-     _score = newScore;
-};
-
-Player.prototype.getNickName = function() {
-    return _nickName;
-};
-
-Player.prototype.getName = function() {
-    return _name;
-};

@@ -9,11 +9,11 @@ Game  = function() {
 };
 
 Game.prototype.createPlayer = function() {
-    var _name = window.prompt('Hello\nPlease introduce your name :');
-    var _nickName = window.prompt('Now introduce your nickname : ');
+    var name = window.prompt('Hello\nPlease introduce your name :');
+    var nickName = window.prompt('Now introduce your nickname : ');
 
-    var _newPlayer = new Player(_name, _nickName);
-    this.players.push(_newPlayer);
+    var newPlayer = new Player(name, nickName);
+    this.players.push(newPlayer);
 };
 
 Game.prototype.start = function() {
@@ -24,12 +24,13 @@ Game.prototype.start = function() {
     var player = this.players[0];
     var playerName = player.getName();
     var nickName = player.getNickName();
-    var score = player.getScore();
+    var score ;= player.getScore();
 
-    console.log('Nickname : '+nickName+ '  Score : '+score);
+
 
     while((this.players[0]).getField().getFieldStatus()==INITIAL_STATUS) {
-
+        score = player.getScore();
+        console.log('Nickname : '+nickName+ '  Score : '+score);
         var xPos = window.prompt('Enter the X coordinate for the shot : ');
         var yPos = window.prompt('Enter the Y coordinate for the shot : ');
 
