@@ -5,7 +5,6 @@
 Player = function(name, nickName) {
     var _name = name;
     var _nickName = nickName;
-    var _score = 0;
     var _field = null;
 
     this.getName = function() {
@@ -22,14 +21,6 @@ Player = function(name, nickName) {
         _nickName = newNickName;
     };
 
-    this.getScore = function() {
-        return _score;
-    };
-
-    this.setScore = function(newScore) {
-        _score = newScore;
-    };
-
     this.getField = function() {
         return _field;
     };
@@ -39,6 +30,11 @@ Player = function(name, nickName) {
     };
 };
 
+/**
+ * This function instantiate the new field for the player.
+ *
+ * @author Jaime Barriga
+ */
 Player.prototype.createField = function(){
     this.setField(new Field());
 };

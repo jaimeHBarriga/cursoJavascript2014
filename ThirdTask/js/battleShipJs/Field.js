@@ -7,6 +7,19 @@ Field = function() {
     this.ships = [];
     var _status = INITIAL_STATUS;
     var _field = [];
+    var _score = 0;
+
+    this.getScore = function() {
+        return _score;
+    };
+
+    this.setScore = function(newScore) {
+        _score = newScore;
+    };
+
+    this.addScore = function(addValue) {
+        _score = _score + addValue;
+    };
 
     /**
      * This method returns the field instance.
@@ -162,6 +175,9 @@ Field.prototype.shoot = function(xPos, yPos) {
     if(cell.indexOf('X') > 0) {
         alert('You already shot in this position : x='+xPos+', y='+yPos);
     } else {
+        if(cell.indexOf('S') > 0) {
+            this.addScore(10);
+        }
         gameField[xPos][yPos] = " X ";
         this.setField(gameField);
         this.draw();
